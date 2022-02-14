@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/moonbank/static/css/main.073c9b0a.css",
+    "main.js": "/moonbank/static/js/main.566fc42a.js",
+    "static/js/787.ff420dec.chunk.js": "/moonbank/static/js/787.ff420dec.chunk.js",
+    "static/media/logo.svg": "/moonbank/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/moonbank/index.html",
+    "main.073c9b0a.css.map": "/moonbank/static/css/main.073c9b0a.css.map",
+    "main.566fc42a.js.map": "/moonbank/static/js/main.566fc42a.js.map",
+    "787.ff420dec.chunk.js.map": "/moonbank/static/js/787.ff420dec.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.566fc42a.js"
+  ]
+}
