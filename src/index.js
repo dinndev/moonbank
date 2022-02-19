@@ -3,9 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./Styles/index.css";
+import { TransactionContextProvider } from "./States/TransactionContext";
+import { initialState, reducer } from "./States/reducer";
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TransactionContextProvider initialState={initialState} reducer={reducer}>
+      <App />
+    </TransactionContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

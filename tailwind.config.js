@@ -5,7 +5,20 @@ module.exports = {
       montserratBold: ["Montserrat"],
       robotoSemiBold: ["Roboto"],
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        navBg: "#F7F9FF",
+        cardBg: "#E7EDFD",
+      },
+      colors: {
+        primary: "#466288",
+        secondary: "#91A4D1",
+      },
+      height: {
+        logoHeight: "15%",
+        footerHeight: "10%",
+      },
+    },
   },
   plugins: [],
 };
