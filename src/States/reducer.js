@@ -115,7 +115,7 @@ export const reducer = (state, action) => {
     case subtract_expence_to_funds:
       return {
         ...state,
-        totalFunds: (state.totalFunds -= state.totalExpence),
+        totalFunds: state.totalFunds - state.totalExpence,
       };
     case subtract_recent_cost_to_funds:
       return {
