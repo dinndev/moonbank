@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useTransactionContext } from "../States/TransactionContext";
 import EditInputForm from "./EditInputForm";
+import EmptyListMessage from "./EmptyListMessage";
 function ExpenceList() {
   const [{ expenceList }, dispatch] = useTransactionContext();
   const [toEditExpence, setToEditExpence] = useState({});
+
   const deleteExpence = (id) => {
     dispatch({
       type: "DELETE_EXPENCE",
@@ -27,17 +29,17 @@ function ExpenceList() {
       <h1 className="w-full h-1/5 flex justify-start items-center font-montserratBold text-lg text-primary">
         Expences
       </h1>
-      <table className="w-full h-4/5  ">
-        <thead>
-          <tr className=" text-left bg-cardBg font-montserratBold text-primary h-12 rounded-lg">
-            <th>Item</th>
-            <th>Cost</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody className="  w-full">
-          {expenceList &&
-            expenceList.map(({ item, cost, id }) => (
+      {expenceList.length > 0 ? (
+        <table className="w-full h-4/5  ">
+          <thead>
+            <tr className=" text-left bg-cardBg font-montserratBold text-primary h-12 rounded-lg">
+              <th>Item</th>
+              <th>Cost</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody className="  w-full">
+            {expenceList.map(({ item, cost, id }) => (
               <tr key={id} className="border-b-2 ">
                 <td className="text-xs text-secondary">{item}</td>
                 <td className="text-xs text-secondary">{cost}</td>
@@ -110,8 +112,11 @@ function ExpenceList() {
                 </td>
               </tr>
             ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      ) : (
+        <EmptyListMessage />
+      )}
     </div>
   );
 }
