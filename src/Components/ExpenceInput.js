@@ -78,7 +78,6 @@ const Expenceinput = () => {
     resetField("cost");
     setCostOnchageValue("");
     setItemOnchageValue("");
-    console.log(toDisplayCost);
   };
 
   return (

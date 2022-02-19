@@ -40,6 +40,8 @@ const types = {
   subtract_expence_to_funds: "SUBTRACT_EXPENCE_TO_FUNDS",
   add_recent_cost_to_total_expence: "ADD_RECENT_COST_TO_TOTAL_EXPENCE",
   subtract_recent_cost_to_funds: "SUBTRACT_RECENT_COST_TO_FUNDS",
+  add_deleted_cost_to_funds: "ADD_DELETED_COST_TO_FUNDS",
+  subtract_deleted_cost_to_expence: "SUBTRACT_DELETED_COST_TO_EXPENCE",
 };
 
 export const reducer = (state, action) => {
@@ -54,6 +56,8 @@ export const reducer = (state, action) => {
     subtract_expence_to_funds,
     add_recent_cost_to_total_expence,
     subtract_recent_cost_to_funds,
+    add_deleted_cost_to_funds,
+    subtract_deleted_cost_to_expence,
   } = types;
   switch (action.type) {
     // Expence control
@@ -122,6 +126,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         totalExpence: state.totalExpence + action.cost,
+      };
+    case add_deleted_cost_to_funds:
+      return {
+        ...state,
+        totalFunds: state.totalFunds + action.cost,
+      };
+    case subtract_deleted_cost_to_expence:
+      return {
+        ...state,
+        totalExpence: state.totalExpence - action.cost,
       };
   }
 };

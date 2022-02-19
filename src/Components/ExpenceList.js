@@ -6,10 +6,20 @@ function ExpenceList() {
   const [{ expenceList }, dispatch] = useTransactionContext();
   const [toEditExpence, setToEditExpence] = useState({});
 
-  const deleteExpence = (id) => {
+  const deleteExpence = (id, cost) => {
+    const toDisplayCost =
+      typeof cost === "number" ? cost : parseFloat(cost.replace(/\$|,/g, ""));
     dispatch({
       type: "DELETE_EXPENCE",
       toDeleteExpenceID: id,
+    });
+    dispatch({
+      type: "ADD_DELETED_COST_TO_FUNDS",
+      cost: toDisplayCost,
+    });
+    dispatch({
+      type: "SUBTRACT_DELETED_COST_TO_EXPENCE",
+      cost: toDisplayCost,
     });
   };
   const getToEditExpence = (item, cost, id) => {
@@ -84,7 +94,7 @@ function ExpenceList() {
                     </svg>
                     {/* Edit svg */}
                   </button>
-                  <button onClick={() => deleteExpence(id)}>
+                  <button onClick={() => deleteExpence(id, cost)}>
                     {/* Trash svg */}
                     <svg
                       width="13"
