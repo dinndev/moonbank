@@ -1,8 +1,10 @@
 import { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useTransactionContext } from "../States/TransactionContext";
+import { useAlert } from "react-alert";
 
 const Deposit = () => {
+  const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");
   const [{}, dispatch] = useTransactionContext();
   const handleSubmit = (e) => {
@@ -14,6 +16,10 @@ const Deposit = () => {
         deposit,
       });
       setOnChangeDepositValue("");
+      alert.show(`${onChangeDepositValue} deposit added`, {
+        // custom timeout just for this one alert
+        type: "success",
+      });
     } else {
       return;
     }

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useTransactionContext } from "../States/TransactionContext";
 import EditInputForm from "./EditInputForm";
+import { useAlert } from "react-alert";
 import EmptyListMessage from "./EmptyListMessage";
 function ExpenceList() {
   const [{ expenceList }, dispatch] = useTransactionContext();
-  const [toEditExpence, setToEditExpence] = useState({});
+  const alert = useAlert();
 
-  const deleteExpence = (id, cost) => {
+  const deleteExpence = (id, cost, item) => {
     const toDisplayCost =
       typeof cost === "number" ? cost : parseFloat(cost.replace(/\$|,/g, ""));
     dispatch({
@@ -20,6 +21,10 @@ function ExpenceList() {
     dispatch({
       type: "SUBTRACT_DELETED_COST_TO_EXPENCE",
       cost: toDisplayCost,
+    });
+    alert.show(`${item} expence deleted`, {
+      // custom timeout just for this one alert
+      type: "error",
     });
   };
   const getToEditExpence = (item, cost, id) => {
@@ -94,7 +99,7 @@ function ExpenceList() {
                     </svg>
                     {/* Edit svg */}
                   </button>
-                  <button onClick={() => deleteExpence(id, cost)}>
+                  <button onClick={() => deleteExpence(id, cost, item)}>
                     {/* Trash svg */}
                     <svg
                       width="13"

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useTransactionContext } from "../States/TransactionContext";
-
+import { useAlert } from "react-alert";
 const Withdraw = () => {
   const [onChangeWithdrawValue, setOnChangeWithdrawValue] = useState("");
   const [{ totalFunds }, dispatch] = useTransactionContext();
-
+  const alert = useAlert();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onChangeWithdrawValue !== "") {
@@ -19,6 +19,10 @@ const Withdraw = () => {
         });
       }
       setOnChangeWithdrawValue("");
+      alert.show(`succesfully withdraw ${onChangeWithdrawValue}`, {
+        // custom timeout just for this one alert
+        type: "success",
+      });
     } else {
       return;
     }

@@ -4,9 +4,11 @@ import CurrencyFormat from "react-currency-format";
 import uniqid from "uniqid";
 
 import { useTransactionContext } from "../States/TransactionContext";
+import { useAlert } from "react-alert";
 
 const Expenceinput = () => {
   const [{ toEditExpence, expenceList }, dispatch] = useTransactionContext();
+  const alert = useAlert();
   const {
     register,
     handleSubmit,
@@ -72,6 +74,10 @@ const Expenceinput = () => {
     dispatch({
       type: "SUBTRACT_RECENT_COST_TO_FUNDS",
       cost: toDisplayCost,
+    });
+    alert.show(`${item} costing: ${cost} added`, {
+      // custom timeout just for this one alert
+      type: "success",
     });
     //  reset inputs
     resetField("item");
