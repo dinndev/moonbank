@@ -19,10 +19,13 @@ const Withdraw = () => {
         });
       }
       setOnChangeWithdrawValue("");
-      alert.show(`succesfully withdraw ${onChangeWithdrawValue}`, {
-        // custom timeout just for this one alert
-        type: "success",
-      });
+      alert.show(
+        `succesfully withdraw ${onChangeWithdrawValue} from your account`,
+        {
+          // custom timeout just for this one alert
+          type: "success",
+        }
+      );
     } else {
       return;
     }

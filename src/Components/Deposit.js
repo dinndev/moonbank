@@ -16,7 +16,7 @@ const Deposit = () => {
         deposit,
       });
       setOnChangeDepositValue("");
-      alert.show(`${onChangeDepositValue} deposit added`, {
+      alert.show(`${onChangeDepositValue} deposit to your account`, {
         // custom timeout just for this one alert
         type: "success",
       });
