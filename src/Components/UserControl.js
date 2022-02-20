@@ -13,7 +13,7 @@ const Usercontrol = () => {
         </div>
         <Send />
       </section>
-      <section className="h-1/2">
+      <section className="h-1/2 w-full flex justify-center items-center">
         <ExpenceGraph />
       </section>
     </div>
