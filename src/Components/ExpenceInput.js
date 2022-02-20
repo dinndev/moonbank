@@ -35,11 +35,18 @@ const Expenceinput = () => {
         type: "EDIT_EXPENCE",
         editedExpence,
       });
-
+      alert.show(`${itemOnchageValue} updated`, {
+        // custom timeout just for this one alert
+        type: "success",
+      });
       setItemOnchageValue("");
       setCostOnchageValue("");
       cancelEditExpence();
     } else {
+      alert.show(`Update failed`, {
+        // custom timeout just for this one alert
+        type: "info",
+      });
       return;
     }
   };

@@ -11,6 +11,12 @@ const Withdraw = () => {
     if (onChangeWithdrawValue !== "") {
       const withdraw = parseFloat(onChangeWithdrawValue.replace(/\$|,/g, ""));
       if (withdraw > totalFunds) {
+        alert.show(
+          `can't withdraw ${onChangeWithdrawValue} unsufficient funds`,
+          {
+            type: "info",
+          }
+        );
         return;
       } else {
         dispatch({
@@ -19,6 +25,7 @@ const Withdraw = () => {
         });
       }
       setOnChangeWithdrawValue("");
+      // Set alert for withdraw
       alert.show(
         `succesfully withdraw ${onChangeWithdrawValue} from your account`,
         {
