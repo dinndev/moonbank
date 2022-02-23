@@ -9,6 +9,7 @@ module.exports = {
       backgroundColor: {
         navBg: "#F7F9FF",
         cardBg: "#E7EDFD",
+        inputColor: "#f6f9fe",
       },
       colors: {
         primary: "#466288",

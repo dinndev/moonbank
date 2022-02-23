@@ -1,31 +1,12 @@
 import uniqid from "uniqid";
 export const initialState = {
-  expenceList: [
-    {
-      item: "Grocery",
-      cost: 200,
-      id: uniqid(),
-    },
-    {
-      item: "Rent",
-      cost: 250,
-      id: uniqid(),
-    },
-    {
-      item: "Water Bill",
-      cost: 600,
-      id: uniqid(),
-    },
-    {
-      item: "Electric Bill",
-      cost: 300,
-      id: uniqid(),
-    },
-  ],
+  expenceList: [],
   totalFunds: 10000,
   totalExpence: 0,
   depositVal: 0,
   withdrawVal: 0,
+  // accounts: [],
+  // loggedInAccount: "",
   toEditExpence: {},
 };
 

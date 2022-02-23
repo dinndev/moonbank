@@ -5,18 +5,11 @@ import Accmoneysvg from "./Svg/AccMoneySvg";
 import Expencessvg from "./Svg/ExpencesSvg";
 const Accountinfo = () => {
   const [{ totalFunds, totalExpence }, dispatch] = useTransactionContext();
-  useEffect(() => {
-    dispatch({
-      type: "GET_TOTAL_EXPENCE",
-    });
-    dispatch({
-      type: "SUBTRACT_EXPENCE_TO_FUNDS",
-    });
-  }, []);
+
   return (
     <div className="w-full h-2/3 flex flex-col justify-center items-start">
       <div className=" h-2/4 w-full flex flex-col justify-center">
-        <h1 className="text-gray-600 font-robotoSemiBold text-5xl">
+        <h1 className="text-gray-600 font-robotoSemiBold text-4xl">
           Aladin Penagunda
         </h1>
         <CurrencyFormat

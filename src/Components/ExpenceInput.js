@@ -17,6 +17,7 @@ const Expenceinput = () => {
   } = useForm();
   const [costOnchageValue, setCostOnchageValue] = useState("");
   const [itemOnchageValue, setItemOnchageValue] = useState("");
+
   useEffect(() => {
     if (toEditExpence.cost && toEditExpence.item) {
       setItemOnchageValue(toEditExpence.item);
@@ -111,7 +112,7 @@ const Expenceinput = () => {
               required: "true",
               onChange: (e) => setItemOnchageValue(e.target.value),
             })}
-            className="h-1/2 p-5 outline-none bg-cardBg rounded-lg "
+            className="h-1/2 border p-5 outline-none bg-inputColor rounded-lg "
             type="text"
             name="item"
           />
@@ -134,7 +135,7 @@ const Expenceinput = () => {
               onChange: (e) => setCostOnchageValue(e.target.value),
             })}
             type="number"
-            className="rounded-lg outline-none p-5 h-1/2 bg-cardBg"
+            className="rounded-lg border  outline-none p-5 h-1/2 bg-inputColor"
             name="cost"
           />
           <label

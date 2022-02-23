@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTransactionContext } from "../States/TransactionContext";
-import EditInputForm from "./EditInputForm";
 import { useAlert } from "react-alert";
 import EmptyListMessage from "./EmptyListMessage";
 import Trashsvg from "./Svg/TrashSvg";
@@ -49,30 +48,31 @@ function ExpenceList() {
       {expenceList.length > 0 ? (
         <table className="w-full h-4/5  ">
           <thead>
-            <tr className=" text-left  font-montserratBold text-primary h-12 rounded-lg">
+            <tr className=" text-left font-montserratBold text-primary h-12 rounded-lg">
               <th>Item</th>
               <th>Cost</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody className="  w-full">
-            {expenceList.map(({ item, cost, id }) => (
-              <tr key={id} className="border-b-2 ">
-                <td className="text-xs text-secondary">{item}</td>
-                <td className="text-xs text-secondary">{cost}</td>
-                <td>
-                  <button
-                    onClick={() => getToEditExpence(item, cost, id)}
-                    className="mr-5"
-                  >
-                    <Editsvg />
-                  </button>
-                  <button onClick={() => deleteExpence(id, cost, item)}>
-                    <Trashsvg />
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {expenceList &&
+              expenceList.map(({ item, cost, id }) => (
+                <tr key={id} className="border-b-2 ">
+                  <td className="text-xs text-secondary">{item}</td>
+                  <td className="text-xs text-secondary">{cost}</td>
+                  <td>
+                    <button
+                      onClick={() => getToEditExpence(item, cost, id)}
+                      className="mr-5"
+                    >
+                      <Editsvg />
+                    </button>
+                    <button onClick={() => deleteExpence(id, cost, item)}>
+                      <Trashsvg />
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       ) : (
