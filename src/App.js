@@ -15,14 +15,14 @@ function App() {
         <div className="w-4/5 flex m-5">
           <Routes>
             <Route
-              path="/account"
+              path="moonbank/account"
               element={
                 <>
                   <ManageExpences /> <Usercontrol />
                 </>
               }
             />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="moonbank" element={<Signup />} />
           </Routes>
         </div>
       </div>

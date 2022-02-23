@@ -9,7 +9,10 @@ const Nav = () => {
         MoonBank
       </h1>
       <ul className="flex-1 mt-16 flex flex-col justify-start items-center w-full h-4/5">
-        <Link className="flex items-center w-6/12 justify-evenly" to="/account">
+        <Link
+          className="flex items-center w-6/12 justify-evenly"
+          to="moonbank/account"
+        >
           <AccountSvg />
           <p className="text-gray-400 text-center text-md font-montserratBold">
             Account
@@ -17,7 +20,7 @@ const Nav = () => {
         </Link>
         <Link
           className="flex mt-20 mb-20 items-center w-6/12 justify-evenly "
-          to="/signup"
+          to="moonbank"
         >
           <Addaccountsvg />
 
