@@ -39,9 +39,6 @@ const Nav = () => {
             Friends
           </p>
         </Link>
-        <Link to="account/login" className="text-xs text-secondary">
-          Login
-        </Link>
       </ul>
       <div className="border-t-2 w-5/6 h-footerHeight flex justify-center items-center bot">
         <p className="text-xs text-gray-400">

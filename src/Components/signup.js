@@ -118,14 +118,14 @@ const Signup = () => {
           <Arrow />
         </button>
 
-        {/* <p className="mt-6 text-xs text-gray-500">
+        <p className="mt-6 text-xs text-gray-500">
           Already have an account ?{" "}
           <span>
-            <Link to="login" className="text-xs text-secondary">
+            <Link to="moonbank/login" className="text-xs text-secondary">
               Login
             </Link>
           </span>
-        </p> */}
+        </p>
       </form>
     </div>
   );
