@@ -40,6 +40,16 @@ const Nav = () => {
           </p>
         </Link>
       </ul>
+      {user.credit ? (
+        ""
+      ) : (
+        <Link
+          to="account/login"
+          className="mb-10 text-lg font-montserratBold  text-secondary"
+        >
+          Login
+        </Link>
+      )}
       <div className="border-t-2 w-5/6 h-footerHeight flex justify-center items-center bot">
         <p className="text-xs text-gray-400">
           Developed by
