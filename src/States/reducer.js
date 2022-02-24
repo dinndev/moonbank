@@ -1,13 +1,15 @@
-import uniqid from "uniqid";
+const usersFromLocalStorage = localStorage.getItem("Users");
+const userFromLocalStorage = localStorage.getItem("User");
 export const initialState = {
   expenceList: [],
   totalFunds: 10000,
   totalExpence: 0,
   depositVal: 0,
   withdrawVal: 0,
-  // accounts: [],
-  // loggedInAccount: "",
+  user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : {},
+  accounts: usersFromLocalStorage ? JSON.parse(usersFromLocalStorage) : [],
   toEditExpence: {},
+  isLoggedIn: false,
 };
 
 const types = {
@@ -23,6 +25,9 @@ const types = {
   subtract_recent_cost_to_funds: "SUBTRACT_RECENT_COST_TO_FUNDS",
   add_deleted_cost_to_funds: "ADD_DELETED_COST_TO_FUNDS",
   subtract_deleted_cost_to_expence: "SUBTRACT_DELETED_COST_TO_EXPENCE",
+  add_user: "ADD_USER",
+  set_user: "SET_USER",
+  toggle_login: "TOGGLE_LOGIN",
 };
 
 export const reducer = (state, action) => {
@@ -39,6 +44,9 @@ export const reducer = (state, action) => {
     subtract_recent_cost_to_funds,
     add_deleted_cost_to_funds,
     subtract_deleted_cost_to_expence,
+    add_user,
+    set_user,
+    toggle_login,
   } = types;
   switch (action.type) {
     // Expence control
@@ -117,6 +125,22 @@ export const reducer = (state, action) => {
       return {
         ...state,
         totalExpence: state.totalExpence - action.cost,
+      };
+    // user
+    case add_user:
+      return {
+        ...state,
+        accounts: state.accounts.concat(action.account),
+      };
+    case set_user:
+      return {
+        ...state,
+        user: { ...action.user },
+      };
+    case toggle_login:
+      return {
+        ...state,
+        isLoggedIn: action.isLoggedIn,
       };
   }
 };

@@ -5,8 +5,9 @@ import { useAlert } from "react-alert";
 import MoneySvg from "./Svg/MoneySvg";
 const Withdraw = () => {
   const [onChangeWithdrawValue, setOnChangeWithdrawValue] = useState("");
-  const [{ totalFunds }, dispatch] = useTransactionContext();
+  const [{ totalFunds, user }, dispatch] = useTransactionContext();
   const alert = useAlert();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onChangeWithdrawValue !== "") {

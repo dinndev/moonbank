@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Arrow from "./Svg/Arrow";
+import { useTransactionContext } from "../States/TransactionContext";
+import cardGen from "card-number-generator";
+import { useAlert } from "react-alert";
 
 const Signup = () => {
+  const [{ accounts }, dispatch] = useTransactionContext();
+
+  const alert = useAlert();
+  useEffect(() => {
+    // sett the users to local storage when accounts array change
+    localStorage.setItem("Users", JSON.stringify(accounts));
+  }, [accounts]);
   const {
     register,
     handleSubmit,
@@ -11,8 +21,42 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const getAccountInfo = (data) => {
-    console.log(data);
+    const { userName, email, password } = data;
+    const randomCardNumber = cardGen({ issuer: "MasterCard" });
+    const userInfo = {
+      userName,
+      email,
+      password,
+      id: randomCardNumber,
+      card: randomCardNumber,
+    };
+
+    // check if user exist
+    if (!isUserExist(email)) {
+      dispatch({
+        type: "ADD_USER",
+        account: userInfo,
+      });
+      alert.show(`${email} successfuly registered`, {
+        type: "success",
+      });
+      // reset fields
+      resetField("email");
+      resetField("password");
+      resetField("userName");
+    } else {
+      // show error if the user exist
+      alert.show(`${email} already exist`, {
+        type: "error",
+      });
+      return;
+    }
   };
+  const isUserExist = (signUpEmail) => {
+    return accounts.some(({ email }) => email === signUpEmail);
+  };
+
+  // console.log(accounts);
   return (
     <div className="w-full h-full">
       <div className="flex justify-start items-start h-1/5 mt-10">
@@ -26,7 +70,7 @@ const Signup = () => {
         onSubmit={handleSubmit(getAccountInfo)}
       >
         <div className="flex w-full h-1/5 ">
-          <div className="flex h-20 w-2/4 mr-10  flex-col">
+          <div className="flex h-20 w-2/4 mr-10 flex-col">
             <input
               className="border h-2/3 outline-none p-5 rounded-lg bg-inputColor"
               type="email"
@@ -74,14 +118,14 @@ const Signup = () => {
           <Arrow />
         </button>
 
-        <p className="mt-6 text-xs text-gray-500">
-          Already hanve an account ?
+        {/* <p className="mt-6 text-xs text-gray-500">
+          Already have an account ?{" "}
           <span>
             <Link to="login" className="text-xs text-secondary">
               Login
             </Link>
           </span>
-        </p>
+        </p> */}
       </form>
     </div>
   );
