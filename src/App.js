@@ -4,6 +4,8 @@ import ManageExpences from "./Components/ManageExpences";
 import { BrowserRouter, Link, Routes, Route, Outlet } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import { useEffect } from "react";
+import { useTransactionContext } from "./States/TransactionContext";
 
 function App() {
   return (

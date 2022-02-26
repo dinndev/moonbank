@@ -1,9 +1,20 @@
+// get local storage var if there is
 const usersFromLocalStorage = localStorage.getItem("Users");
 const userFromLocalStorage = localStorage.getItem("User");
+const expenceListsFromLocalStorage = localStorage.getItem("Expences");
+const totalExpenceFromLocalStorage = localStorage.getItem("totalExpence");
+const totalFundsFromLocalStorage = localStorage.getItem("totalFunds");
+// set initial state
 export const initialState = {
-  expenceList: [],
-  totalFunds: 10000,
-  totalExpence: 0,
+  expenceList: expenceListsFromLocalStorage
+    ? JSON.parse(expenceListsFromLocalStorage)
+    : [],
+  totalFunds: totalFundsFromLocalStorage
+    ? JSON.parse(totalFundsFromLocalStorage)
+    : 0,
+  totalExpence: totalExpenceFromLocalStorage
+    ? JSON.parse(totalExpenceFromLocalStorage)
+    : 0,
   depositVal: 0,
   withdrawVal: 0,
   user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : {},

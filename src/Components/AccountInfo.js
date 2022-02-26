@@ -6,6 +6,9 @@ import Expencessvg from "./Svg/ExpencesSvg";
 const Accountinfo = () => {
   const [{ totalFunds, totalExpence, account, user }, dispatch] =
     useTransactionContext();
+  useEffect(() => {
+    localStorage.setItem("totalFunds", JSON.stringify(totalFunds));
+  }, [totalFunds]);
   const logout = () => {
     dispatch({
       type: "SET_USER",
