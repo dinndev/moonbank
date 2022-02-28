@@ -20,7 +20,7 @@ export const initialState = {
   user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : {},
   accounts: usersFromLocalStorage ? JSON.parse(usersFromLocalStorage) : [],
   toEditExpence: {},
-  isLoggedIn: false,
+  isLoggedIn: userFromLocalStorage ? true : false,
 };
 
 const types = {

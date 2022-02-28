@@ -9,13 +9,7 @@ const Accountinfo = () => {
   useEffect(() => {
     localStorage.setItem("totalFunds", JSON.stringify(totalFunds));
   }, [totalFunds]);
-  const logout = () => {
-    dispatch({
-      type: "SET_USER",
-      user: {},
-    });
-    localStorage.removeItem("User");
-  };
+
   return (
     <div className="w-full h-2/3 flex flex-col justify-center items-start">
       <div className="  h-2/4 w-full flex flex-col justify-center">
@@ -28,12 +22,6 @@ const Accountinfo = () => {
           displayType={"text"}
           format="#### #### #### ####"
         />
-        <button
-          className="mt-5 text-red-400 font-montserratBold text-sm w-14 text-left"
-          onClick={logout}
-        >
-          Logout
-        </button>
       </div>
       <div className=" w-full h-1/2 flex justify-start items-center ">
         <div className="flex w-44 justify-between mr-5">

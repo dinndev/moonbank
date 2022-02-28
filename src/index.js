@@ -29,6 +29,8 @@ ReactDOM.render(
                   </main>
                 }
               />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
               <Route
                 path="account"
                 element={
@@ -38,8 +40,6 @@ ReactDOM.render(
                   </PrivateRoute>
                 }
               />
-              <Route path="account/login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
             </Route>
           </Routes>
         </BrowserRouter>

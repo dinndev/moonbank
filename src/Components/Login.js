@@ -15,6 +15,10 @@ const Login = () => {
   const alert = useAlert();
   const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname
+    ? `${location.state?.from?.pathname}`
+    : "/moonbank/account";
+  console.log(from);
   const {
     register,
     handleSubmit,
@@ -47,9 +51,7 @@ const Login = () => {
         type: "SET_USER",
         user: currentUser[0],
       });
-      const from = location.state?.from?.pathname
-        ? `${location.state?.from?.pathname}`
-        : "login";
+
       navigate(from);
     } else {
       setError("password", {

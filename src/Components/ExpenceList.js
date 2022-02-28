@@ -7,7 +7,6 @@ import Editsvg from "./Svg/EditSvg";
 function ExpenceList() {
   const [{ expenceList }, dispatch] = useTransactionContext();
   const alert = useAlert();
-
   const deleteExpence = (id, cost, item) => {
     const toDisplayCost =
       typeof cost === "number" ? cost : parseFloat(cost.replace(/\$|,/g, ""));
