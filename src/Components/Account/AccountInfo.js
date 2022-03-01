@@ -1,8 +1,8 @@
 import CurrencyFormat from "react-currency-format";
-import { useTransactionContext } from "../States/TransactionContext";
+import { useTransactionContext } from "../../States/TransactionContext";
 import { useEffect } from "react";
-import Accmoneysvg from "./Svg/AccMoneySvg";
-import Expencessvg from "./Svg/ExpencesSvg";
+import Accmoneysvg from "../Svg/AccMoneySvg";
+import Expencessvg from "../Svg/ExpencesSvg";
 const Accountinfo = () => {
   const userFromLocalStorage = localStorage.getItem("User");
   const [{ totalFunds, totalExpence, accounts, user, expenceList }, dispatch] =

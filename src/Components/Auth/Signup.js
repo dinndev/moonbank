@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import Arrow from "./Svg/Arrow";
-import { useTransactionContext } from "../States/TransactionContext";
+import Arrow from "../Svg/Arrow";
+import { useTransactionContext } from "../../States/TransactionContext";
 import cardGen from "card-number-generator";
 import { useAlert } from "react-alert";
 

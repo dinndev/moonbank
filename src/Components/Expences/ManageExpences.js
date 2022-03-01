@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useTransactionContext } from "../States/TransactionContext";
-import Accountinfo from "./AccountInfo";
+import { useTransactionContext } from "../../States/TransactionContext";
+import Accountinfo from "../Account/AccountInfo";
 import Expenceinput from "./ExpenceInput";
 import ExpenceList from "./ExpenceList.js";
 

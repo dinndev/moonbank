@@ -1,8 +1,8 @@
 import { useState } from "react";
 import CurrencyFormat from "react-currency-format";
-import { useTransactionContext } from "../States/TransactionContext";
+import { useTransactionContext } from "/Users/aladinpenagunda/Desktop/Activities/moonbank/src/States/TransactionContext.js";
 import { useAlert } from "react-alert";
-import MoneySvg from "./Svg/MoneySvg";
+import MoneySvg from "../Svg/MoneySvg";
 const Deposit = () => {
   const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");

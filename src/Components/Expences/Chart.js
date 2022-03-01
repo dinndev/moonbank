@@ -1,5 +1,5 @@
 import { Doughnut } from "react-chartjs-2";
-import { useTransactionContext } from "../States/TransactionContext";
+import { useTransactionContext } from "../../States/TransactionContext";
 import React, { useState, useEffect } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import randomColor from "randomcolor";

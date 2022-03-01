@@ -1,8 +1,8 @@
 import React from "react";
-import Deposit from "./Deposit";
-import Send from "./Send";
-import ExpenceGraph from "./ExpenceGraph";
-import Withdraw from "./Withdraw";
+import Deposit from "../Account/Deposit";
+import Send from "../Account/Send";
+import ExpenceGraph from "../Expences/ExpenceGraph";
+import Withdraw from "../Account/Withdraw";
 const Usercontrol = () => {
   return (
     <div className="h-full w-6/12">
