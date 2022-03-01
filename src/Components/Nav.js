@@ -39,7 +39,7 @@ const Nav = () => {
       <ul className="flex-1 mt-16 flex flex-col justify-start items-center w-full h-4/5">
         <Link
           className="flex items-center w-6/12 justify-evenly"
-          to={`account`}
+          to={`moonbank/account`}
         >
           <AccountSvg />
           <p className="text-gray-400 text-center text-md font-montserratBold">
@@ -48,7 +48,7 @@ const Nav = () => {
         </Link>
         <Link
           className="flex mt-20 mb-20 items-center w-6/12 justify-evenly "
-          to="signup"
+          to="moonbank/signup"
         >
           <Addaccountsvg />
 
@@ -58,7 +58,7 @@ const Nav = () => {
         </Link>
         <Link
           className="flex mb-20 items-center w-6/12 justify-evenly "
-          to="moonbank"
+          to="/moonbank"
         >
           <AccountSvg />
 
@@ -71,7 +71,7 @@ const Nav = () => {
         <button onClick={logout}>Log out</button>
       ) : (
         <Link
-          to="login"
+          to="moonbank/login"
           className="mb-10 lg  text-lg font-montserratBold  text-secondary"
         >
           Login
