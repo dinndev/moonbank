@@ -58,7 +58,6 @@ const Signup = () => {
     return accounts.some(({ email }) => email === signUpEmail);
   };
 
-  // console.log(accounts);
   return (
     <div className="w-full h-full">
       <div className="flex justify-start items-start h-1/5 mt-10">

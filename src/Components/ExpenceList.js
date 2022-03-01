@@ -8,6 +8,7 @@ function ExpenceList() {
   const [{ expenceList, totalFunds, user }, dispatch] = useTransactionContext();
   const alert = useAlert();
   useEffect(() => {
+    // fetch new expence to reflect on expence list
     dispatch({
       type: "SET_EXPENCE_LIST",
       expenceList: user.expenceList,
