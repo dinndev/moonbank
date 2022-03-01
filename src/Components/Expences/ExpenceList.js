@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useTransactionContext } from "../States/TransactionContext";
+import { useTransactionContext } from "../../States/TransactionContext";
 import { useAlert } from "react-alert";
-import EmptyListMessage from "./EmptyListMessage";
-import Trashsvg from "./Svg/TrashSvg";
-import Editsvg from "./Svg/EditSvg";
+import EmptyListMessage from "../EmptyListMessage";
+import Trashsvg from "../Svg/TrashSvg";
+import Editsvg from "../Svg/EditSvg";
 function ExpenceList() {
   const [{ expenceList, totalFunds, user }, dispatch] = useTransactionContext();
   const alert = useAlert();

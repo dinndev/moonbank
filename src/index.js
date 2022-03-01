@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Usercontrol from "./Components/UserControl";
-import ManageExpences from "./Components/ManageExpences";
-import Signup from "./Components/Signup";
+import Usercontrol from "./Components/Account/UserControl";
+import ManageExpences from "./Components/Expences/ManageExpences";
+import Signup from "./Components/Auth/Signup";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./Styles/index.css";
@@ -12,9 +12,8 @@ import { TransactionContextProvider } from "./States/TransactionContext";
 import { initialState, reducer } from "./States/reducer";
 import { options } from "./alertOption";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Components/Login";
+import Login from "./Components/Auth/Login";
 import PrivateRoute from "./Components/Route/PrivateRoute";
-import { useTransactionContext } from "./States/TransactionContext";
 ReactDOM.render(
   <React.StrictMode>
     <TransactionContextProvider initialState={initialState} reducer={reducer}>

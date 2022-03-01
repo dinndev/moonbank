@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import CurrencyFormat from "react-currency-format";
 import uniqid from "uniqid";
 
-import { useTransactionContext } from "../States/TransactionContext";
+import { useTransactionContext } from "../../States/TransactionContext";
 import { useAlert } from "react-alert";
 
 const Expenceinput = () => {
