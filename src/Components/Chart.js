@@ -7,8 +7,14 @@ import randomColor from "randomcolor";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const Chart = () => {
   const [{ expenceList, totalFunds }] = useTransactionContext();
-  const pieData = [...expenceList.map(({ cost }) => cost), totalFunds];
-  const pielabel = [...expenceList.map(({ item }) => item), "Funds"];
+  const pieData = expenceList && [
+    ...expenceList.map(({ cost }) => cost),
+    totalFunds,
+  ];
+  const pielabel = expenceList && [
+    ...expenceList.map(({ item }) => item),
+    "Funds",
+  ];
 
   const data = {
     labels: pielabel,

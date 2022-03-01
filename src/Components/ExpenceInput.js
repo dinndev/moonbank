@@ -7,8 +7,11 @@ import { useTransactionContext } from "../States/TransactionContext";
 import { useAlert } from "react-alert";
 
 const Expenceinput = () => {
-  const [{ toEditExpence, expenceList, totalExpence }, dispatch] =
-    useTransactionContext();
+  const [
+    { toEditExpence, expenceList, totalExpence, user, totalFunds },
+    dispatch,
+  ] = useTransactionContext();
+
   const alert = useAlert();
   const {
     register,
@@ -19,10 +22,6 @@ const Expenceinput = () => {
   const [costOnchageValue, setCostOnchageValue] = useState("");
   const [itemOnchageValue, setItemOnchageValue] = useState("");
   // Add the expences to local storage on load and every time expence add
-  useEffect(() => {
-    localStorage.setItem("Expences", JSON.stringify(expenceList));
-    localStorage.setItem("totalExpence", JSON.stringify(totalExpence));
-  }, [expenceList, totalExpence]);
 
   useEffect(() => {
     if (toEditExpence.cost && toEditExpence.item) {
@@ -77,6 +76,13 @@ const Expenceinput = () => {
       cost,
       id: uniqid(),
     };
+    dispatch({
+      type: "SET_USER",
+      user: {
+        ...user,
+        expenceList: [...user.expenceList, expence],
+      },
+    });
     dispatch({
       type: "ADD_EXPENCE",
       recentExpence: expence,

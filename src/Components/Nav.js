@@ -1,20 +1,35 @@
 import AccountSvg from "./Svg/AccountSvg";
+import { useEffect } from "react";
 import Addaccountsvg from "./Svg/AddAccountSvg";
 import { Link } from "react-router-dom";
 import { useTransactionContext } from "../States/TransactionContext";
 import { useLocation } from "react-router";
 const Nav = () => {
-  const [{ user, isLoggedIn }, dispatch] = useTransactionContext();
+  const [{ user, isLoggedIn, expenceList, accounts }, dispatch] =
+    useTransactionContext();
+  useEffect(() => {
+    localStorage.setItem("Users", JSON.stringify(accounts));
+  }, [accounts]);
   const logout = () => {
     dispatch({
       type: "SET_USER",
       user: {},
     });
-    localStorage.removeItem("User");
+    dispatch({
+      type: "UPDATE_ACCOUNTS",
+      updatedUser: user,
+    });
+    // reset the expence list from state
+    dispatch({
+      type: "SET_EXPENCE_LIST",
+      expenceList: [],
+    });
     dispatch({
       type: "TOGGLE_LOGIN",
       isLoggedIn: false,
     });
+
+    localStorage.removeItem("User");
   };
   return (
     <nav className="w-1/5 bg-navBg h-screen rounded-lg flex flex-col justify-evenly items-center">

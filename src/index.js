@@ -14,6 +14,7 @@ import { options } from "./alertOption";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login";
 import PrivateRoute from "./Components/Route/PrivateRoute";
+import { useTransactionContext } from "./States/TransactionContext";
 ReactDOM.render(
   <React.StrictMode>
     <TransactionContextProvider initialState={initialState} reducer={reducer}>

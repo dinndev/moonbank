@@ -9,16 +9,12 @@ import { useNavigate, useLocation } from "react-router";
 
 const Login = () => {
   const [{ accounts, user, isLoggedIn }, dispatch] = useTransactionContext();
-  useEffect(() => {
-    localStorage.setItem("User", JSON.stringify(user));
-  }, [user]);
   const alert = useAlert();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname
     ? `${location.state?.from?.pathname}`
     : "/moonbank/account";
-  console.log(from);
   const {
     register,
     handleSubmit,
@@ -32,7 +28,6 @@ const Login = () => {
       password: "",
     },
   });
-
   const getAccountInfo = (data) => {
     const { email, password } = data;
     const userFromInput = {
@@ -51,7 +46,6 @@ const Login = () => {
         type: "SET_USER",
         user: currentUser[0],
       });
-
       navigate(from);
     } else {
       setError("password", {

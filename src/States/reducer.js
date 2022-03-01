@@ -6,21 +6,21 @@ const totalExpenceFromLocalStorage = localStorage.getItem("totalExpence");
 const totalFundsFromLocalStorage = localStorage.getItem("totalFunds");
 // set initial state
 export const initialState = {
-  expenceList: expenceListsFromLocalStorage
-    ? JSON.parse(expenceListsFromLocalStorage)
+  expenceList: userFromLocalStorage
+    ? JSON.parse(userFromLocalStorage).expenceList
     : [],
-  totalFunds: totalFundsFromLocalStorage
-    ? JSON.parse(totalFundsFromLocalStorage)
-    : 0,
-  totalExpence: totalExpenceFromLocalStorage
-    ? JSON.parse(totalExpenceFromLocalStorage)
-    : 0,
+  totalFunds: 0,
+  totalExpence: 0,
   depositVal: 0,
   withdrawVal: 0,
   user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : {},
   accounts: usersFromLocalStorage ? JSON.parse(usersFromLocalStorage) : [],
   toEditExpence: {},
-  isLoggedIn: userFromLocalStorage ? true : false,
+  isLoggedIn: userFromLocalStorage
+    ? JSON.parse(userFromLocalStorage).email
+      ? true
+      : false
+    : "",
 };
 
 const types = {
@@ -39,6 +39,8 @@ const types = {
   add_user: "ADD_USER",
   set_user: "SET_USER",
   toggle_login: "TOGGLE_LOGIN",
+  update_accounts: "UPDATE_ACCOUNTS",
+  set_expence_list: "SET_EXPENCE_LIST",
 };
 
 export const reducer = (state, action) => {
@@ -58,13 +60,16 @@ export const reducer = (state, action) => {
     add_user,
     set_user,
     toggle_login,
+    update_accounts,
+    set_expence_list,
   } = types;
   switch (action.type) {
     // Expence control
     case add_expence:
       return {
         ...state,
-        expenceList: state.expenceList.concat(action.recentExpence),
+        expenceList:
+          state.expenceList && state.expenceList.concat(action.recentExpence),
       };
     case delete_expence:
       return {
@@ -152,6 +157,27 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
+      };
+    case update_accounts: {
+      const toUpdateAccount = state.accounts.filter(
+        ({ email }) => email === action.updatedUser.email
+      );
+      const array = [...state.accounts];
+      array[array.indexOf(toUpdateAccount[0])] = action.updatedUser;
+      return {
+        ...state,
+        accounts: array,
+      };
+    }
+    case set_expence_list:
+      return {
+        ...state,
+        expenceList: action.expenceList,
+      };
+
+    default:
+      return {
+        ...state,
       };
   }
 };

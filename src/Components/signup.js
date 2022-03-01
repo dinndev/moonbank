@@ -7,8 +7,8 @@ import cardGen from "card-number-generator";
 import { useAlert } from "react-alert";
 
 const Signup = () => {
-  const [{ accounts }, dispatch] = useTransactionContext();
-
+  const [{ accounts, totalFunds, totalExpence, expenceList }, dispatch] =
+    useTransactionContext();
   const alert = useAlert();
   useEffect(() => {
     // sett the users to local storage when accounts array change
@@ -24,13 +24,15 @@ const Signup = () => {
     const { userName, email, password } = data;
     const randomCardNumber = cardGen({ issuer: "MasterCard" });
     const userInfo = {
+      expenceList,
       userName,
       email,
       password,
       id: randomCardNumber,
       card: randomCardNumber,
+      totalExpence,
+      totalFunds,
     };
-
     // check if user exist
     if (!isUserExist(email)) {
       dispatch({

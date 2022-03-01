@@ -4,11 +4,9 @@ import { useEffect } from "react";
 import Accmoneysvg from "./Svg/AccMoneySvg";
 import Expencessvg from "./Svg/ExpencesSvg";
 const Accountinfo = () => {
-  const [{ totalFunds, totalExpence, account, user }, dispatch] =
+  const userFromLocalStorage = localStorage.getItem("User");
+  const [{ totalFunds, totalExpence, accounts, user, expenceList }, dispatch] =
     useTransactionContext();
-  useEffect(() => {
-    localStorage.setItem("totalFunds", JSON.stringify(totalFunds));
-  }, [totalFunds]);
 
   return (
     <div className="w-full h-2/3 flex flex-col justify-center items-start">
