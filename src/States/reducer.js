@@ -41,6 +41,7 @@ const types = {
   toggle_login: "TOGGLE_LOGIN",
   update_accounts: "UPDATE_ACCOUNTS",
   set_expence_list: "SET_EXPENCE_LIST",
+  delete_account: "DELETE_ACCOUNT",
 };
 
 export const reducer = (state, action) => {
@@ -62,6 +63,7 @@ export const reducer = (state, action) => {
     toggle_login,
     update_accounts,
     set_expence_list,
+    delete_account,
   } = types;
   switch (action.type) {
     // Expence control
@@ -174,7 +176,11 @@ export const reducer = (state, action) => {
         ...state,
         expenceList: action.expenceList,
       };
-
+    case delete_account:
+      return {
+        ...state,
+        accounts: state.accounts.filter(({ id }) => id !== action.id),
+      };
     default:
       return {
         ...state,

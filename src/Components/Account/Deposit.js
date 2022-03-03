@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 const Deposit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const minimumAmountToDeposit = 100;
+  const minimumAmountToDeposit = 50;
   const maximumAmountToDeposit = 100000;
   const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");
@@ -24,7 +24,10 @@ const Deposit = () => {
   const deposit = parseFloat(onChangeDepositValue.replace(/\$|,/g, ""));
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (deposit < maximumAmountToDeposit && deposit > minimumAmountToDeposit) {
+    if (
+      deposit <= maximumAmountToDeposit &&
+      deposit >= minimumAmountToDeposit
+    ) {
       dispatch({
         type: "DEPOSIT",
         deposit,
@@ -47,7 +50,7 @@ const Deposit = () => {
       return;
     } else {
       alert.show(
-        `can't deposit ${onChangeDepositValue} minimum deposit is 100 dollars`,
+        `can't deposit ${onChangeDepositValue} minimum deposit is $50 `,
         {
           // custom timeout just for this one alert
           type: "error",

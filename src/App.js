@@ -20,7 +20,7 @@ function App() {
         <AlertProvider template={AlertTemplate} {...options}>
           <BrowserRouter>
             <div className="App transition-all flex w-screen">
-              <div className="w-full items-center justify-center flex h-screen overflow-hidden">
+              <div className="w-full items-center justify-between flex h-screen overflow-hidden">
                 <Routes>
                   <Route path="moonbank" element={<Login />} />
 

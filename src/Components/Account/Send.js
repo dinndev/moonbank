@@ -48,7 +48,7 @@ const Deposit = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Deposit</ModalHeader>
+          <ModalHeader>Send</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <form className="" onSubmit={handleSubmit}>
@@ -79,7 +79,7 @@ const Deposit = () => {
                 mr={3}
                 onClick={onClose}
               >
-                Deposit
+                Send
               </Button>
             </form>
           </ModalBody>

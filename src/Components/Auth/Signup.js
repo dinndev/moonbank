@@ -71,7 +71,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-3/4 flex flex-col items-center m-10 h-full">
+    <div className="w-3/4 flex flex-col  items-center m-auto h-full">
       <div className="flex justify-center items-start h-1/5 mt-10">
         <h1 className="text-4xl font-robotoSemiBold text-gray-600">
           Create Account
