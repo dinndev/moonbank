@@ -16,13 +16,15 @@ import {
 } from "@chakra-ui/react";
 const Deposit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const minimumAmountToDeposit = 100;
+  const maximumAmountToDeposit = 100000;
   const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");
   const [{}, dispatch] = useTransactionContext();
+  const deposit = parseFloat(onChangeDepositValue.replace(/\$|,/g, ""));
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onChangeDepositValue !== "") {
-      const deposit = parseFloat(onChangeDepositValue.replace(/\$|,/g, ""));
+    if (deposit < maximumAmountToDeposit && deposit > minimumAmountToDeposit) {
       dispatch({
         type: "DEPOSIT",
         deposit,
@@ -32,7 +34,25 @@ const Deposit = () => {
         // custom timeout just for this one alert
         type: "success",
       });
+    } else if (deposit > maximumAmountToDeposit) {
+      alert.show(
+        `can't deposit ${onChangeDepositValue} maximum deposit is 100,000 dollars`,
+        {
+          // custom timeout just for this one alert
+          type: "error",
+        }
+      );
+      return;
+    } else if (onChangeDepositValue === "") {
+      return;
     } else {
+      alert.show(
+        `can't deposit ${onChangeDepositValue} minimum deposit is 100 dollars`,
+        {
+          // custom timeout just for this one alert
+          type: "error",
+        }
+      );
       return;
     }
   };
@@ -72,13 +92,7 @@ const Deposit = () => {
                 />
               </div>
 
-              <Button
-                className="my-5"
-                colorScheme="blue"
-                type="submit"
-                mr={3}
-                onClick={onClose}
-              >
+              <Button className="my-5" colorScheme="blue" type="submit" mr={3}>
                 Deposit
               </Button>
             </form>
