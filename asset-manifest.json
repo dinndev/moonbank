@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/moonbank/static/css/main.54545160.css",
-    "main.js": "/moonbank/static/js/main.53d26c6e.js",
+    "main.css": "/moonbank/static/css/main.7537e351.css",
+    "main.js": "/moonbank/static/js/main.69e4a79f.js",
     "static/js/787.ff420dec.chunk.js": "/moonbank/static/js/787.ff420dec.chunk.js",
     "index.html": "/moonbank/index.html",
-    "main.54545160.css.map": "/moonbank/static/css/main.54545160.css.map",
-    "main.53d26c6e.js.map": "/moonbank/static/js/main.53d26c6e.js.map",
+    "main.7537e351.css.map": "/moonbank/static/css/main.7537e351.css.map",
+    "main.69e4a79f.js.map": "/moonbank/static/js/main.69e4a79f.js.map",
     "787.ff420dec.chunk.js.map": "/moonbank/static/js/787.ff420dec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.54545160.css",
-    "static/js/main.53d26c6e.js"
+    "static/css/main.7537e351.css",
+    "static/js/main.69e4a79f.js"
   ]
 }
