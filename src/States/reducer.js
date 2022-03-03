@@ -1,15 +1,14 @@
 // get local storage var if there is
 const usersFromLocalStorage = localStorage.getItem("Users");
 const userFromLocalStorage = localStorage.getItem("User");
-const expenceListsFromLocalStorage = localStorage.getItem("Expences");
-const totalExpenceFromLocalStorage = localStorage.getItem("totalExpence");
-const totalFundsFromLocalStorage = localStorage.getItem("totalFunds");
 // set initial state
 export const initialState = {
   expenceList: userFromLocalStorage
     ? JSON.parse(userFromLocalStorage).expenceList
     : [],
-  totalFunds: 1000,
+  totalFunds: userFromLocalStorage
+    ? JSON.parse(userFromLocalStorage).totalFunds
+    : 1000,
   totalExpence: 0,
   depositVal: 0,
   withdrawVal: 0,
@@ -42,6 +41,8 @@ const types = {
   update_accounts: "UPDATE_ACCOUNTS",
   set_expence_list: "SET_EXPENCE_LIST",
   delete_account: "DELETE_ACCOUNT",
+  send_funds: "SEND_FUNDS",
+  subtract_sent_amount: "SUBTRACT_SENT_AMOUNT",
 };
 
 export const reducer = (state, action) => {
@@ -64,6 +65,8 @@ export const reducer = (state, action) => {
     update_accounts,
     set_expence_list,
     delete_account,
+    send_funds,
+    subtract_sent_amount,
   } = types;
   switch (action.type) {
     // Expence control
@@ -181,6 +184,31 @@ export const reducer = (state, action) => {
         ...state,
         accounts: state.accounts.filter(({ id }) => id !== action.id),
       };
+    case send_funds: {
+      const accounts = [...state.accounts];
+      const accountToSendFundsArray = state.accounts.filter(
+        ({ id }) => id === action.id
+      );
+      const accountToSendFunds = accountToSendFundsArray[0];
+
+      accounts[accounts.indexOf(accountToSendFunds)].totalFunds +=
+        action.amount;
+      return {
+        ...state,
+        accounts: accounts,
+      };
+    }
+    case subtract_sent_amount: {
+      const updatedUser = { ...state.user };
+      let totalFunds = updatedUser.totalFunds;
+      totalFunds -= action.amount;
+      updatedUser.totalFunds = totalFunds;
+      return {
+        ...state,
+        user: updatedUser,
+      };
+    }
+
     default:
       return {
         ...state,

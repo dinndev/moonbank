@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useTransactionContext } from "/Users/aladinpenagunda/Desktop/Activities/moonbank/src/States/TransactionContext.js";
 import { useAlert } from "react-alert";
-import MoneySvg from "../Svg/MoneySvg";
+import { useForm } from "react-hook-form";
 import {
   Modal,
   ModalOverlay,
@@ -12,28 +12,43 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  Stack,
+  Select,
   useDisclosure,
 } from "@chakra-ui/react";
 const Deposit = () => {
+  const { register, handleSubmit, resetField } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");
-  const [{}, dispatch] = useTransactionContext();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (onChangeDepositValue !== "") {
-      const deposit = parseFloat(onChangeDepositValue.replace(/\$|,/g, ""));
+  const [{ accounts, user, totalFunds }, dispatch] = useTransactionContext();
+  const getAmount = (data) => {
+    const minimunAmountToSend = 100;
+    const maximumAmountToSend = 50000;
+    const parsedAmount = parseInt(data.amount);
+    if (
+      parsedAmount <= user.totalFunds &&
+      parsedAmount <= maximumAmountToSend &&
+      parsedAmount >= minimunAmountToSend
+    ) {
       dispatch({
-        type: "DEPOSIT",
-        deposit,
+        type: "SEND_FUNDS",
+        amount: parsedAmount,
+        id: data.id,
       });
-      setOnChangeDepositValue("");
-      alert.show(`${onChangeDepositValue} deposit to your account`, {
-        // custom timeout just for this one alert
+      dispatch({
+        type: "SUBTRACT_SENT_AMOUNT",
+        amount: parsedAmount,
+      });
+      resetField("amount");
+      alert.show(`succesfully sent ${parsedAmount} to ${data.id}`, {
         type: "success",
       });
-    } else {
+      onClose();
       return;
+    } else {
+      alert.show("Invalid amount", { type: "error" });
+      onClose();
     }
   };
 
@@ -45,40 +60,41 @@ const Deposit = () => {
       >
         Send
       </button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} size="xl" onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Send</ModalHeader>
+          <ModalHeader>Send to</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form className="" onSubmit={handleSubmit}>
+            <form className="" onSubmit={handleSubmit(getAmount)}>
+              <Select
+                name="id"
+                {...register("id", { required: "true" })}
+                className="my-5"
+                placeholder="Users"
+              >
+                {accounts.map(
+                  ({ email, id }) =>
+                    email !== user.email && (
+                      <option key={id} value={id}>{`${email}`}</option>
+                    )
+                )}
+              </Select>
               <label
-                htmlFor="deposit"
+                htmlFor="amount"
                 className="text-secondary text-xs font-robotoSemiBold "
               >
                 Amount
               </label>
               <div className="flex mt-3 h-24">
-                <CurrencyFormat
-                  required
-                  className="bg-navBg w-3/4 outline-none p-2 mr-2 rounded-lg text-3xl"
-                  value={onChangeDepositValue}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                  onValueChange={(values) => {
-                    const { formattedValue, value } = values;
-                    setOnChangeDepositValue(formattedValue);
-                  }}
+                <input
+                  className="bg-navBg w-3/4 outline-none p-6 mr-2 rounded-lg text-3xl"
+                  type="text"
+                  name="amount"
+                  {...register("amount", { required: "true" })}
                 />
               </div>
-
-              <Button
-                className="my-5"
-                colorScheme="blue"
-                type="submit"
-                mr={3}
-                onClick={onClose}
-              >
+              <Button className="my-5" colorScheme="blue" type="submit" mr={3}>
                 Send
               </Button>
             </form>

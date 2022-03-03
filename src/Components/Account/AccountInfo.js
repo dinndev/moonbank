@@ -20,6 +20,9 @@ const Accountinfo = () => {
           displayType={"text"}
           format="#### #### #### ####"
         />
+        <p className="text-xs font-robotoSemiBold text-primary mt-3">
+          {user.email}
+        </p>
       </div>
       <div className=" w-full h-1/2 flex justify-start items-center ">
         <div className="flex w-44 justify-between mr-5">
@@ -29,7 +32,7 @@ const Accountinfo = () => {
           <div className="amount flex flex-col justify-center items-center">
             <CurrencyFormat
               className="text-xl font-bold font-robotoSemiBold text-gray-700"
-              value={totalFunds}
+              value={user.totalFunds}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}

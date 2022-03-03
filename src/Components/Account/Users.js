@@ -30,9 +30,8 @@ const Users = () => {
       <ul className="w-3/5 flex flex-col h-4/5">
         {accounts &&
           accounts.map(({ userName, id, totalFunds }) => (
-            <div className="flex w-full justify-between ">
+            <div key={id} className="flex w-full justify-between ">
               <li
-                key={id}
                 className={`flex w-11/12 relative text-xs bg-cardBg rounded-lg p-7 my-2 items-center justify-between ${
                   id === user.id
                     ? "bg-primary text-white"
@@ -59,7 +58,7 @@ const Users = () => {
                 </p>
               </li>
               {id !== user.id && (
-                <button onClick={() => deleteAccount(id)}>
+                <button key={id} onClick={() => deleteAccount(id)}>
                   <Trashsvg />
                 </button>
               )}

@@ -30,7 +30,6 @@ const Nav = () => {
       type: "TOGGLE_LOGIN",
       isLoggedIn: false,
     });
-
     localStorage.removeItem("User");
   };
 
