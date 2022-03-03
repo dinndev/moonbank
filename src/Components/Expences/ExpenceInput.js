@@ -180,7 +180,7 @@ const Expenceinput = () => {
           onClick={cancelEditExpence}
           className={`h-3/4 w-1/5 mt-3 font-montserratBold text-sm bg-transparent text-red-500 ${
             toEditExpence.cost ? "block" : " hidden"
-          } text-white rounded-lg p-3`}
+          } text-red-400 rounded-lg p-3`}
           type="submit"
         >
           Cancel

@@ -12,7 +12,7 @@ const ManageExpences = () => {
   }, [user]);
 
   return (
-    <div className="w-3/6 h-full mr-8 ">
+    <div className="w-2/5 ml-5 h-full ">
       <div className="w-full h-2/4 ">
         <Accountinfo />
         <Expenceinput />

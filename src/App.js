@@ -10,43 +10,57 @@ import Login from "./Components/Auth/Login";
 import PrivateRoute from "./Components/Route/PrivateRoute";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { ChakraProvider } from "@chakra-ui/react";
+import Users from "./Components/Account/Users";
 
 function App() {
   return (
     <TransactionContextProvider initialState={initialState} reducer={reducer}>
-      <AlertProvider template={AlertTemplate} {...options}>
-        <BrowserRouter>
-          <div className="App transition-all flex w-screen">
-            <Nav />
-            <div className="w-4/5  flex m-5">
-              <Routes>
-                <Route path="moonbank" element={<Signup />} />
-                <Route
-                  path="moonbank/account"
-                  element={
-                    <PrivateRoute>
-                      <ManageExpences />
-                      <Usercontrol />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path="moonbank/login" element={<Login />} />
-                <Route path="moonbank/signup" element={<Signup />} />
+      <ChakraProvider>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <BrowserRouter>
+            <div className="App transition-all flex w-screen">
+              <div className="w-full items-center justify-center flex h-screen overflow-hidden">
+                <Routes>
+                  <Route path="moonbank" element={<Login />} />
 
-                <Route
-                  path="*"
-                  element={
-                    <main style={{ padding: "1rem" }}>
-                      <p>Bonk! There's nothing here!</p>
-                    </main>
-                  }
-                />
-              </Routes>
-              <Outlet />
+                  <Route
+                    path="moonbank/account"
+                    element={
+                      <PrivateRoute>
+                        <Nav />
+                        <ManageExpences />
+                        <Usercontrol />
+                      </PrivateRoute>
+                    }
+                  ></Route>
+                  <Route
+                    path="/moonbank/account/users"
+                    element={
+                      <PrivateRoute>
+                        <Nav />
+                        <Users />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route path="login" element={<Login />} />
+                  <Route path="/moonbank/signup" element={<Signup />} />
+
+                  <Route
+                    path="*"
+                    element={
+                      <main style={{ padding: "1rem" }}>
+                        <p>Bonk! There's nothing here!</p>
+                      </main>
+                    }
+                  />
+                </Routes>
+                <Outlet />
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
-      </AlertProvider>
+          </BrowserRouter>
+        </AlertProvider>
+      </ChakraProvider>
     </TransactionContextProvider>
   );
 }

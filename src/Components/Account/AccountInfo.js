@@ -9,8 +9,8 @@ const Accountinfo = () => {
     useTransactionContext();
 
   return (
-    <div className="w-full h-2/3 flex flex-col justify-center items-start">
-      <div className="  h-2/4 w-full flex flex-col justify-center">
+    <div className="w-full h-2/3  flex flex-col justify-center items-start">
+      <div className=" h-2/4 w-full flex flex-col justify-center">
         <h1 className="text-gray-600 font-robotoSemiBold text-4xl">
           {user.userName}
         </h1>

@@ -1,4 +1,5 @@
 import AccountSvg from "./Svg/AccountSvg";
+import Friendssvg from "./Svg/FriendsSvg";
 import { useEffect } from "react";
 import Addaccountsvg from "./Svg/AddAccountSvg";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ const Nav = () => {
   useEffect(() => {
     localStorage.setItem("Users", JSON.stringify(accounts));
   }, [accounts]);
+  const pathLocation = useLocation();
   const logout = () => {
     dispatch({
       type: "SET_USER",
@@ -31,6 +33,7 @@ const Nav = () => {
 
     localStorage.removeItem("User");
   };
+
   return (
     <nav className="w-1/5 bg-navBg h-screen rounded-lg flex flex-col justify-evenly items-center">
       <h1 className=" font-montserratBold h-1/6 flex justify-center items-center text-2xl text-primary">
@@ -38,45 +41,57 @@ const Nav = () => {
       </h1>
       <ul className="flex-1 mt-16 flex flex-col justify-start items-center w-full h-4/5">
         <Link
-          className="flex items-center w-6/12 justify-evenly"
-          to={`moonbank/account`}
+          className="flex  items-center w-6/12 justify-evenly"
+          to={`/moonbank/account`}
         >
-          <AccountSvg />
-          <p className="text-gray-400 text-center text-md font-montserratBold">
+          <AccountSvg
+            color={`${
+              pathLocation.pathname === "/moonbank/account"
+                ? "text-primary"
+                : "text-gray-400"
+            }`}
+          />
+          <p
+            className={`transition-all text-center text-md font-montserratBold ${
+              pathLocation.pathname === "/moonbank/account"
+                ? "text-primary"
+                : "text-gray-400"
+            }`}
+          >
             Account
           </p>
         </Link>
-        <Link
-          className="flex mt-20 mb-20 items-center w-6/12 justify-evenly "
-          to="moonbank/signup"
-        >
-          <Addaccountsvg />
 
-          <p className="text-gray-400 text-center text-md font-montserratBold">
-            Create <br /> account
-          </p>
-        </Link>
         <Link
-          className="flex mb-20 items-center w-6/12 justify-evenly "
-          to="/moonbank"
+          className="flex my-10  items-center w-6/12 justify-evenly "
+          to="/moonbank/account/users"
         >
-          <AccountSvg />
+          <Friendssvg
+            color={`${
+              pathLocation.pathname === "/moonbank/account/users"
+                ? "text-primary"
+                : "text-gray-400"
+            }`}
+          />
 
-          <p className="text-gray-400 text-center text-md font-montserratBold">
-            Friends
+          <p
+            className={`transition-all text-center text-md font-montserratBold ${
+              pathLocation.pathname === "/moonbank/account/users"
+                ? "text-primary"
+                : "text-gray-400"
+            }`}
+          >
+            Users
           </p>
         </Link>
       </ul>
-      {isLoggedIn ? (
-        <button onClick={logout}>Log out</button>
-      ) : (
-        <Link
-          to="moonbank/login"
-          className="mb-10 lg  text-lg font-montserratBold  text-secondary"
-        >
-          Login
-        </Link>
-      )}
+
+      <button
+        className="mb-10 lg text-lg font-montserratBold text-red-400"
+        onClick={logout}
+      >
+        Log out
+      </button>
 
       <div className="border-t-2 w-5/6 h-footerHeight flex justify-center items-center bot">
         <p className="text-xs text-gray-400">

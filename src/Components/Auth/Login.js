@@ -34,7 +34,7 @@ const Login = () => {
       email,
       password,
     };
-    if (verifyAccount(userFromInput)) {
+    if (verifyEmail(userFromInput) && verifyPassword(userFromInput)) {
       const currentUser = accounts.filter(
         ({ email }) => email === userFromInput.email
       );
@@ -47,27 +47,29 @@ const Login = () => {
         user: currentUser[0],
       });
       navigate(from);
-    } else {
-      setError("password", {
-        type: "manual",
-        message: "email or password is incorrect",
-      });
+    } else if (!verifyPassword(userFromInput) && verifyEmail(userFromInput)) {
       setError("email", {
         type: "manual",
-        message: "email or password is incorrect",
+        message: "Incorrect email or password",
+      });
+    } else {
+      setError("email", {
+        type: "manual",
+        message: "User doesn't exist",
       });
     }
   };
 
-  const verifyAccount = (user) => {
-    return accounts.some(
-      ({ email, password }) =>
-        email === user.email && password === user.password
-    );
+  const verifyEmail = (user) => {
+    return accounts.some(({ email }) => email === user.email);
   };
+  const verifyPassword = (user) => {
+    return accounts.some(({ password }) => password === user.password);
+  };
+
   return (
-    <div className="w-full h-full">
-      <div className="flex justify-start items-start h-1/5 mt-10">
+    <div className="w-full  flex flex-col items-center m-10 h-full">
+      <div className="flex justify-center items-start h-1/5 mt-10">
         <h1 className="text-4xl font-robotoSemiBold text-gray-600">Login</h1>
       </div>
       {errors.email?.message === "true" ? (
@@ -79,43 +81,53 @@ const Login = () => {
       )}
       <form
         action=""
-        className="w-2/4 h-3/4"
+        className="w-2/4 flex flex-col items-center h-3/4 "
         onSubmit={handleSubmit(getAccountInfo)}
       >
-        <div className="flex w-full h-1/5 ">
-          <div className="flex h-20 w-2/4 mr-2 flex-col">
+        <div className="flex w-full flex-col items-center   ">
+          <div className="flex  h-20 w-2/4 mb-12 flex-col">
             <input
-              className="border p-5 outline-none h-2/3 rounded-lg bg-inputColor"
+              className="border h-2/3 outline-none p-5 rounded-lg bg-inputColor"
               type="email"
               name="email"
               {...register("email", { required: "true" })}
             />
             <label
               htmlFor="email"
+              className="font-montserratBold  text-secondary mt-3 text-sm"
+            >
+              Email
+            </label>
+          </div>
+          <div className="flex h-20 w-2/4 flex-col">
+            <input
+              className="border p-5 outline-none h-2/3 rounded-lg bg-inputColor"
+              type="password"
+              name="password"
+              {...register("password", { required: "true" })}
+              autoComplete={"confirm password"}
+            />
+            <label
+              htmlFor="password "
               className="text-secondary font-montserratBold mt-3 text-sm"
             >
-              email
+              Password
             </label>
           </div>
         </div>
-        <div className="flex h-20 w-2/4 mr-2 flex-col">
-          <input
-            className="border p-5 outline-none h-2/3 rounded-lg bg-inputColor"
-            type="password"
-            name="password"
-            {...register("password", { required: "true" })}
-            autoComplete={"confirm password"}
-          />
-          <label
-            htmlFor="password "
-            className="text-secondary font-montserratBold mt-3 text-sm"
-          >
-            Password
-          </label>
+        <div className=" w-2/4">
+          <button className="bg-primary mt-16 rounded-lg p-5" type="submit">
+            <Arrow />
+          </button>
+          <p className="mt-6 text-xs text-gray-500">
+            Don't have an account?{" "}
+            <span>
+              <Link to="/moonbank/signup" className="text-xs text-secondary">
+                Signup
+              </Link>
+            </span>
+          </p>
         </div>
-        <button className="bg-primary mt-16 rounded-lg p-5" type="submit">
-          <Arrow />
-        </button>
       </form>
     </div>
   );
