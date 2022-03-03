@@ -13,6 +13,6 @@ export default function PrivateRoute({ children }) {
   return user.card ? (
     children
   ) : (
-    <Navigate to="/moonbank/login" replace state={{ from: location }} />
+    <Navigate to="/moonbank" replace state={{ from: location }} />
   );
 }

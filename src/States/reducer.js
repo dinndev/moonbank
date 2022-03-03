@@ -9,7 +9,7 @@ export const initialState = {
   expenceList: userFromLocalStorage
     ? JSON.parse(userFromLocalStorage).expenceList
     : [],
-  totalFunds: 0,
+  totalFunds: 1000,
   totalExpence: 0,
   depositVal: 0,
   withdrawVal: 0,
