@@ -26,29 +26,34 @@ const Deposit = () => {
     const minimunAmountToSend = 100;
     const maximumAmountToSend = 50000;
     const parsedAmount = parseInt(data.amount);
-    if (
-      parsedAmount <= user.totalFunds &&
-      parsedAmount <= maximumAmountToSend &&
-      parsedAmount >= minimunAmountToSend
-    ) {
-      dispatch({
-        type: "SEND_FUNDS",
-        amount: parsedAmount,
-        id: data.id,
+    if (parsedAmount > user.totalFunds) {
+      alert.show(`can't send ${parsedAmount} higher than the total funds`, {
+        type: "error",
       });
-      dispatch({
-        type: "SUBTRACT_SENT_AMOUNT",
-        amount: parsedAmount,
-      });
-      resetField("amount");
-      alert.show(`succesfully sent ${parsedAmount} to ${data.id}`, {
-        type: "success",
-      });
-      onClose();
-      return;
     } else {
-      alert.show("Invalid amount", { type: "error" });
-      onClose();
+      if (
+        parsedAmount <= maximumAmountToSend &&
+        parsedAmount >= minimunAmountToSend
+      ) {
+        dispatch({
+          type: "SEND_FUNDS",
+          amount: parsedAmount,
+          id: data.id,
+        });
+        dispatch({
+          type: "SUBTRACT_SENT_AMOUNT",
+          amount: parsedAmount,
+        });
+        resetField("amount");
+        alert.show(`succesfully sent ${parsedAmount} to ${data.id}`, {
+          type: "success",
+        });
+        onClose();
+        return;
+      } else {
+        alert.show("Invalid amount", { type: "error" });
+        onClose();
+      }
     }
   };
 

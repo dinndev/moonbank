@@ -9,7 +9,9 @@ export const initialState = {
   totalFunds: userFromLocalStorage
     ? JSON.parse(userFromLocalStorage).totalFunds
     : 1000,
-  totalExpence: 0,
+  totalExpence: userFromLocalStorage
+    ? JSON.parse(userFromLocalStorage).totalExpence
+    : 0,
   depositVal: 0,
   withdrawVal: 0,
   user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : {},
@@ -43,9 +45,13 @@ const types = {
   delete_account: "DELETE_ACCOUNT",
   send_funds: "SEND_FUNDS",
   subtract_sent_amount: "SUBTRACT_SENT_AMOUNT",
+  update_stats: "UPDATE_STATS",
 };
 
 export const reducer = (state, action) => {
+  const updatedUser = { ...state.user };
+  let totalFunds = updatedUser.totalFunds;
+  let totalExpence = updatedUser.totalExpence;
   const {
     add_expence,
     withdraw,
@@ -67,14 +73,14 @@ export const reducer = (state, action) => {
     delete_account,
     send_funds,
     subtract_sent_amount,
+    update_stats,
   } = types;
   switch (action.type) {
     // Expence control
     case add_expence:
       return {
         ...state,
-        expenceList:
-          state.expenceList && state.expenceList.concat(action.recentExpence),
+        expenceList: state.expenceList.concat(action.recentExpence),
       };
     case delete_expence:
       return {
@@ -98,55 +104,80 @@ export const reducer = (state, action) => {
         ];
       test.cost = action.editedExpence.cost;
       test.item = action.editedExpence.item;
+      updatedUser.expenceList = newArr;
       return {
         ...state,
-        expenceList: newArr,
+        user: updatedUser,
       };
     }
     // balance
-    case deposit:
+    case deposit: {
+      totalFunds += action.deposit;
+      updatedUser.totalFunds = totalFunds;
       return {
         ...state,
-        totalFunds: (state.totalFunds += action.deposit),
+        user: updatedUser,
       };
-    case withdraw:
+    }
+    case withdraw: {
+      totalFunds -= action.withdraw;
+      updatedUser.totalFunds = totalFunds;
       return {
         ...state,
-        totalFunds: (state.totalFunds -= action.withdraw),
+        user: updatedUser,
       };
-    case get_total_expence:
+    }
+    case get_total_expence: {
+      updatedUser.totalExpence = state.expenceList
+        .map(({ cost }) => cost)
+        .reduce((prev, curr) => prev + curr);
       return {
         ...state,
-        totalExpence: state.expenceList
-          .map(({ cost }) => cost)
-          .reduce((prev, curr) => prev + curr),
+        user: updatedUser,
       };
+    }
+    case subtract_expence_to_funds: {
+      totalFunds -= state.totalExpence;
+      updatedUser.totalFunds = totalFunds;
+      return {
+        ...state,
+        user: updatedUser,
+      };
+    }
+    case subtract_recent_cost_to_funds: {
+      totalFunds -= action.cost;
+      updatedUser.totalFunds = totalFunds;
+      return {
+        ...state,
+        user: updatedUser,
+      };
+    }
+    case add_recent_cost_to_total_expence: {
+      totalExpence += action.cost;
+      updatedUser.totalExpence = totalExpence;
+      return {
+        ...state,
+        user: updatedUser,
+      };
+    }
 
-    case subtract_expence_to_funds:
+    case add_deleted_cost_to_funds: {
+      totalFunds += action.cost;
+      updatedUser.totalFunds = totalFunds;
       return {
         ...state,
-        totalFunds: state.totalFunds - state.totalExpence,
+        user: updatedUser,
       };
-    case subtract_recent_cost_to_funds:
+    }
+
+    case subtract_deleted_cost_to_expence: {
+      totalExpence -= action.cost;
+      updatedUser.totalExpence = totalExpence;
       return {
         ...state,
-        totalFunds: state.totalFunds - action.cost,
+        user: updatedUser,
       };
-    case add_recent_cost_to_total_expence:
-      return {
-        ...state,
-        totalExpence: state.totalExpence + action.cost,
-      };
-    case add_deleted_cost_to_funds:
-      return {
-        ...state,
-        totalFunds: state.totalFunds + action.cost,
-      };
-    case subtract_deleted_cost_to_expence:
-      return {
-        ...state,
-        totalExpence: state.totalExpence - action.cost,
-      };
+    }
     // user
     case add_user:
       return {
@@ -199,14 +230,24 @@ export const reducer = (state, action) => {
       };
     }
     case subtract_sent_amount: {
-      const updatedUser = { ...state.user };
-      let totalFunds = updatedUser.totalFunds;
       totalFunds -= action.amount;
       updatedUser.totalFunds = totalFunds;
       return {
         ...state,
         user: updatedUser,
       };
+    }
+    case update_stats: {
+      // let newTotalExpence = updatedUser.expenceList
+      //   .map(({ cost }) => cost)
+      //   .reduce((prev, curr) => prev + curr);
+      // const test = (updatedUser.totalFunds -= updatedUser.totalExpence);
+      // updatedUser.totalFunds = test;
+      // console.log(test);
+      // return {
+      //   ...state,
+      //   user: updatedUser,
+      // };
     }
 
     default:

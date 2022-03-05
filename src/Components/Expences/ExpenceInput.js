@@ -21,6 +21,13 @@ const Expenceinput = () => {
   } = useForm();
   const [costOnchageValue, setCostOnchageValue] = useState("");
   const [itemOnchageValue, setItemOnchageValue] = useState("");
+  // update accounts when user changes
+  useEffect(() => {
+    dispatch({
+      type: "UPDATE_ACCOUNTS",
+      updatedUser: user,
+    });
+  }, [user]);
   // Add the expences to local storage on load and every time expence add
 
   useEffect(() => {
@@ -29,6 +36,7 @@ const Expenceinput = () => {
       setCostOnchageValue(toEditExpence.cost);
     }
   }, [toEditExpence]);
+
   const saveEditedExpence = () => {
     const editedExpence = {
       item: itemOnchageValue,
@@ -41,6 +49,12 @@ const Expenceinput = () => {
         type: "EDIT_EXPENCE",
         editedExpence,
       });
+      dispatch({
+        type: "SUBTRACT_EXPENCE_TO_FUNDS",
+      });
+      // dispatch({
+      //   type: "UPDATE_STATS",
+      // });
       alert.show(`${itemOnchageValue} updated`, {
         // custom timeout just for this one alert
         type: "success",

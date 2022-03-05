@@ -19,37 +19,53 @@ const Withdraw = () => {
   const [onChangeWithdrawValue, setOnChangeWithdrawValue] = useState("");
   const [{ totalFunds, user }, dispatch] = useTransactionContext();
   const alert = useAlert();
-
+  const minimumWithdrawAmmount = 50;
+  const maximumAmmounttoWithdraw = 100000;
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onChangeWithdrawValue !== "") {
-      const withdraw = parseFloat(onChangeWithdrawValue.replace(/\$|,/g, ""));
-      if (withdraw > totalFunds) {
-        alert.show(
-          `can't withdraw ${onChangeWithdrawValue} unsufficient funds`,
-          {
-            type: "info",
-          }
-        );
-        return;
-      } else {
+    const withdraw = parseFloat(onChangeWithdrawValue.replace(/\$|,/g, ""));
+    if (withdraw > user.totalFunds) {
+      alert.show(
+        `can't withdraw ${onChangeWithdrawValue} higher than the total funds`,
+        {
+          type: "error",
+        }
+      );
+    } else {
+      if (
+        withdraw <= maximumAmmounttoWithdraw &&
+        withdraw >= minimumWithdrawAmmount
+      ) {
         dispatch({
           type: "WITHDRAW",
           withdraw,
         });
+        alert.show(
+          `succesfully withdraw ${onChangeWithdrawValue} from your account`,
+          {
+            // custom timeout just for this one alert
+            type: "success",
+          }
+        );
+      } else {
+        alert.show(
+          `can't withdraw ${onChangeWithdrawValue} minimum withdraw is $50 and higher is $100,000`,
+          {
+            type: "error",
+          }
+        );
+        return;
       }
-      setOnChangeWithdrawValue("");
-      // Set alert for withdraw
-      alert.show(
-        `succesfully withdraw ${onChangeWithdrawValue} from your account`,
-        {
-          // custom timeout just for this one alert
-          type: "success",
-        }
-      );
-    } else {
-      return;
     }
+    setOnChangeWithdrawValue("");
+    // Set alert for withdraw
+    // alert.show(
+    //   `succesfully withdraw ${onChangeWithdrawValue} from your account`,
+    //   {
+    //     // custom timeout just for this one alert
+    //     type: "success",
+    //   }
+    // );
   };
   return (
     <div className="mx-2">

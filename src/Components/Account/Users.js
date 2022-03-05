@@ -2,6 +2,7 @@ import React from "react";
 import { useTransactionContext } from "../../States/TransactionContext";
 import { useAlert } from "react-alert";
 import Trashsvg from "../Svg/TrashSvg";
+import CurrencyFormat from "react-currency-format";
 
 const Users = () => {
   const [{ accounts, user }, dispatch] = useTransactionContext();
@@ -48,13 +49,23 @@ const Users = () => {
                   <span className="font-bold font-montserratBold mr-2">
                     card:{" "}
                   </span>
-                  {` ${id}`}
+                  <CurrencyFormat
+                    value={id}
+                    displayType={"text"}
+                    format="#### #### #### ####"
+                  />
                 </p>
                 <p>
                   <span className="font-bold font-montserratBold mr-2">
                     funds:{" "}
                   </span>
-                  {` ${totalFunds}`}
+                  <CurrencyFormat
+                    className="text-xs"
+                    value={totalFunds}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
                 </p>
               </li>
               {id !== user.id && (

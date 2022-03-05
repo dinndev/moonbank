@@ -4,6 +4,8 @@ import { useAlert } from "react-alert";
 import EmptyListMessage from "../EmptyListMessage";
 import Trashsvg from "../Svg/TrashSvg";
 import Editsvg from "../Svg/EditSvg";
+import CurrencyFormat from "react-currency-format";
+
 function ExpenceList() {
   const [{ expenceList, totalFunds, user }, dispatch] = useTransactionContext();
   const alert = useAlert();
@@ -72,7 +74,17 @@ function ExpenceList() {
             {expenceList.map(({ item, cost, id }, idx) => (
               <tr key={id} className="border-b-2 ">
                 <td className="text-xs text-secondary">{item}</td>
-                <td className="text-xs text-secondary">{cost}</td>
+                <td className="text-xs text-secondary">
+                  {
+                    <CurrencyFormat
+                      className="text-secondary text-xs"
+                      value={cost}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  }
+                </td>
                 <td>
                   <button
                     onClick={() => getToEditExpence(item, cost, id)}

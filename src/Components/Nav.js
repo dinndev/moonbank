@@ -94,9 +94,9 @@ const Nav = () => {
 
       <div className="border-t-2 w-5/6 h-footerHeight flex justify-center items-center bot">
         <p className="text-xs text-gray-400">
-          Developed by
+          Source code at
           <span className="text-secondary font-robotoSemiBold text-xs">
-            <a href="https://github.com/dinndev"> dinndev</a>
+            <a href="https://github.com/dinndev/moonbank"> Github</a>
           </span>
         </p>
       </div>

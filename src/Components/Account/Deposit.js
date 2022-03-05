@@ -46,8 +46,6 @@ const Deposit = () => {
         }
       );
       return;
-    } else if (onChangeDepositValue === "") {
-      return;
     } else {
       alert.show(
         `can't deposit ${onChangeDepositValue} minimum deposit is $50 `,

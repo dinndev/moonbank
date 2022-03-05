@@ -49,7 +49,7 @@ const Accountinfo = () => {
           <div className="amount flex flex-col justify-center items-center">
             <CurrencyFormat
               className="text-xl font-bold font-robotoSemiBold text-gray-700"
-              value={totalExpence}
+              value={user.totalExpence}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"$"}
