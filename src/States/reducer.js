@@ -238,16 +238,17 @@ export const reducer = (state, action) => {
       };
     }
     case update_stats: {
-      // let newTotalExpence = updatedUser.expenceList
-      //   .map(({ cost }) => cost)
-      //   .reduce((prev, curr) => prev + curr);
-      // const test = (updatedUser.totalFunds -= updatedUser.totalExpence);
-      // updatedUser.totalFunds = test;
-      // console.log(test);
-      // return {
-      //   ...state,
-      //   user: updatedUser,
-      // };
+      const newExpenceListTotal = parseInt(
+        action.expenceList
+          .map(({ cost }) => cost)
+          .reduce((prev, curr) => prev + curr)
+      );
+      updatedUser.totalExpence = newExpenceListTotal;
+      updatedUser.totalFunds -= newExpenceListTotal;
+      return {
+        ...state,
+        user: updatedUser,
+      };
     }
 
     default:

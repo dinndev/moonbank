@@ -6,10 +6,10 @@ import randomColor from "randomcolor";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const Chart = () => {
-  const [{ expenceList, totalFunds }] = useTransactionContext();
+  const [{ expenceList, totalFunds, user }] = useTransactionContext();
   const pieData = expenceList && [
     ...expenceList.map(({ cost }) => cost),
-    totalFunds,
+    user.totalFunds,
   ];
   const pielabel = expenceList && [
     ...expenceList.map(({ item }) => item),

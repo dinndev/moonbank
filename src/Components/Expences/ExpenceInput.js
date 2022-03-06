@@ -52,12 +52,13 @@ const Expenceinput = () => {
       dispatch({
         type: "SUBTRACT_EXPENCE_TO_FUNDS",
       });
-      // dispatch({
-      //   type: "UPDATE_STATS",
-      // });
       alert.show(`${itemOnchageValue} updated`, {
         // custom timeout just for this one alert
         type: "success",
+      });
+      dispatch({
+        type: "UPDATE_STATS",
+        expenceList,
       });
       setItemOnchageValue("");
       setCostOnchageValue("");

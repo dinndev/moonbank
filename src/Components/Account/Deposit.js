@@ -93,7 +93,13 @@ const Deposit = () => {
                 />
               </div>
 
-              <Button className="my-5" colorScheme="blue" type="submit" mr={3}>
+              <Button
+                onClick={onClose}
+                className="my-5"
+                colorScheme="blue"
+                type="submit"
+                mr={3}
+              >
                 Deposit
               </Button>
             </form>
