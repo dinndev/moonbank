@@ -41,13 +41,13 @@ const Users = () => {
               >
                 <p>
                   <span className="font-bold font-montserratBold mr-2">
-                    name:
+                    Name:
                   </span>
                   {`${userName}`}
                 </p>
                 <p>
                   <span className="font-bold font-montserratBold mr-2">
-                    card:{" "}
+                    Card:{" "}
                   </span>
                   <CurrencyFormat
                     value={id}
@@ -57,7 +57,7 @@ const Users = () => {
                 </p>
                 <p>
                   <span className="font-bold font-montserratBold mr-2">
-                    funds:{" "}
+                    Funds:{" "}
                   </span>
                   <CurrencyFormat
                     className="text-xs"

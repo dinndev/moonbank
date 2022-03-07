@@ -102,9 +102,13 @@ export const reducer = (state, action) => {
             ({ id }) => id === action.editedExpence.id
           )
         ];
+      const deductedPrevToCurr = action.currCost - action.prevCost;
       test.cost = action.editedExpence.cost;
       test.item = action.editedExpence.item;
       updatedUser.expenceList = newArr;
+      // update expences after the edit
+      updatedUser.totalExpence += deductedPrevToCurr;
+      updatedUser.totalFunds -= deductedPrevToCurr;
       return {
         ...state,
         user: updatedUser,

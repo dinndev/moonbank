@@ -43,32 +43,28 @@ const Expenceinput = () => {
       cost: costOnchageValue,
       id: toEditExpence.id,
     };
-    //  check if the input is empty
-    if (itemOnchageValue && costOnchageValue !== "") {
+    //  check the values if it's the same
+    if (
+      itemOnchageValue !== toEditExpence.item ||
+      costOnchageValue !== toEditExpence.cost
+    ) {
       dispatch({
         type: "EDIT_EXPENCE",
         editedExpence,
+        currCost: costOnchageValue,
+        prevCost: toEditExpence.cost,
       });
-      dispatch({
-        type: "SUBTRACT_EXPENCE_TO_FUNDS",
-      });
+
       alert.show(`${itemOnchageValue} updated`, {
         // custom timeout just for this one alert
         type: "success",
       });
-      dispatch({
-        type: "UPDATE_STATS",
-        expenceList,
-      });
+
       setItemOnchageValue("");
       setCostOnchageValue("");
       cancelEditExpence();
     } else {
-      alert.show(`Update failed`, {
-        // custom timeout just for this one alert
-        type: "info",
-      });
-      return;
+      cancelEditExpence();
     }
   };
 
