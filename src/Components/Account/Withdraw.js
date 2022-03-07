@@ -24,9 +24,9 @@ const Withdraw = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const withdraw = parseFloat(onChangeWithdrawValue.replace(/\$|,/g, ""));
-    if (withdraw > user.totalFunds) {
+    if (withdraw + 50 > user.totalFunds) {
       alert.show(
-        `can't withdraw ${onChangeWithdrawValue} higher than the total funds`,
+        `can't withdraw ${onChangeWithdrawValue} total funds has to have minimum of $50`,
         {
           type: "error",
         }

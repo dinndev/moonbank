@@ -21,12 +21,13 @@ const Deposit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const alert = useAlert();
   const [onChangeDepositValue, setOnChangeDepositValue] = useState("");
-  const [{ accounts, user, totalFunds }, dispatch] = useTransactionContext();
+  const [{ accounts, user }, dispatch] = useTransactionContext();
+  let [{ totalFunds }] = useTransactionContext();
   const getAmount = (data) => {
     const minimunAmountToSend = 100;
     const maximumAmountToSend = 50000;
     const parsedAmount = parseInt(data.amount);
-    if (parsedAmount > user.totalFunds) {
+    if (parsedAmount + 50 >= user.totalFunds) {
       alert.show(`can't send ${parsedAmount} higher than the total funds`, {
         type: "error",
       });
